@@ -23,3 +23,4 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('password/forgot', [Controller::class, 'forgotPassword'])
     ->name('api_user_forgot_password');
+    // Route::post('userlogin',[Controller::class,'forgotPassword']);

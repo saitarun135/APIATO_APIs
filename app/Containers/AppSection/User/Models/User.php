@@ -6,8 +6,9 @@ use App\Containers\AppSection\Authentication\Traits\AuthenticationTrait;
 use App\Containers\AppSection\Authorization\Traits\AuthorizationTrait;
 use App\Ship\Parents\Models\UserModel;
 use Illuminate\Notifications\Notifiable;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class User extends UserModel
+class User extends UserModel 
 {
     use AuthorizationTrait;
     use AuthenticationTrait;
@@ -19,7 +20,7 @@ class User extends UserModel
         'name',
         'email',
         'password',
-        'device',
+       'device',
         'platform',
         'gender',
         'birth',
@@ -45,4 +46,13 @@ class User extends UserModel
         'is_admin' => 'boolean',
         'email_verified_at' => 'datetime',
     ];
+    // public function getJWTIdentifier()
+    // {
+    //     return $this->getKey();
+    // }
+
+    // public function getJWTCustomClaims()
+    // {
+    //     return [];
+    // }
 }

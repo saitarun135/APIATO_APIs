@@ -26,14 +26,67 @@ use App\Containers\AppSection\User\UI\API\Transformers\UserPrivateProfileTransfo
 use App\Containers\AppSection\User\UI\API\Transformers\UserTransformer;
 use App\Ship\Parents\Controllers\ApiController;
 use Illuminate\Http\JsonResponse;
+// use Request;
+use Illuminate\Http\Request;
+use Validator;
+use JWTAuth;
+use App\Containers\AppSection\User\Models\User;
+use App\Containers\UserRegistration\UserContainer\Models\Users;
 
 class Controller extends ApiController
 {
+    
+
     public function registerUser(RegisterUserRequest $request): array
     {
         $user = app(RegisterUserAction::class)->run($request);
         return $this->transform($user, UserTransformer::class);
     }
+    // public function registerUser(Request $request)
+    // {
+    //     $user = new User([
+    //         'name'=> $request->input('name'),
+    //         'email'=> $request->input('email'),
+    //         'password'=> bcrypt($request->input('password')),
+    //         'gender'=> $request->input('gender'),
+    //     ]);     
+    //     $user->save();
+        
+    //     return response()->json(['message'=>'user registered successfully']);     
+    // }
+    // public function login(Request $request)
+    // {
+    //     $req = Validator::make($request->all(), [
+    //         'email' => 'required|email',
+    //         'password' => 'required',
+    //     ]);
+   
+    //     $email = $request->get('email');
+    //     $user = User::where('email', $email)->first();
+   
+    //     if (!$user) {
+    //         return response()->json(['status' => 400, 'message' => "Invalid credentials! email doesn't exists"]);
+    //     }
+   
+    //     if ($req->fails()) {
+    //         return response()->json(['status' => 403, 'message' => "please enter the valid details"]);
+    //     }
+   
+    //     $token = JWTAuth::fromUser($user);
+    //     if (!$token) {
+    //         return response()->json(['status' => 401, 'message' => 'Unauthenticated']);
+    //     }
+    //     return $this->generateToken($token);
+    // }
+
+   
+    // public function generateToken($token)
+    // {
+    //     return response()->json([
+    //         'message' => 'succesfully logged in...',
+    //         'token' => $token
+    //     ]);
+    // }
 
     public function createAdmin(CreateAdminRequest $request): array
     {
@@ -46,6 +99,7 @@ class Controller extends ApiController
         $user = app(UpdateUserAction::class)->run($request);
         return $this->transform($user, UserTransformer::class);
     }
+   
 
     public function deleteUser(DeleteUserRequest $request): JsonResponse
     {
@@ -94,4 +148,28 @@ class Controller extends ApiController
         app(ForgotPasswordAction::class)->run($request);
         return $this->noContent(202);
     }
+    // public function forgotPassword(Request $request)
+    // {
+    //     $req = Validator::make($request->all(), [
+    //         'email' => 'required|email',
+    //         'password' => 'required',
+    //     ]);
+   
+    //     $email = $request->get('email');
+    //     $user = User::where('email', $email)->first();
+   
+    //     if (!$user) {
+    //         return response()->json(['status' => 400, 'message' => "Invalid credentials! email doesn't exists"]);
+    //     }
+   
+    //     if ($req->fails()) {
+    //         return response()->json(['status' => 403, 'message' => "please enter the valid details"]);
+    //     }
+   
+    //     $token = JWTAuth::fromUser($user);
+    //     if (!$token) {
+    //         return response()->json(['status' => 401, 'message' => 'Unauthenticated']);
+    //     }
+    //     return $this->generateToken($token);   
+    // }
 }

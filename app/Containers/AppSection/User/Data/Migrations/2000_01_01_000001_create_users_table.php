@@ -20,7 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('birth')->nullable();
             $table->string('device')->nullable();
             $table->string('platform')->nullable();
-            $table->boolean('is_admin')->default(true);
+           $table->boolean('is_admin')->default(true);
             $table->rememberToken();
             $table->timestamps();
         });
